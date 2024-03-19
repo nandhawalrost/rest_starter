@@ -1,0 +1,10 @@
+GIN:
+go get -u github.com/gin-gonic/gin
+
+GORM:
+go get -u gorm.io/gorm
+GORM DRIVER:
+go get -u gorm.io/driver/mysql
+
+GODOTENV:
+go get github.com/joho/godotenv
