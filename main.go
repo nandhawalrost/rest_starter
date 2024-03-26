@@ -4,6 +4,7 @@ import (
 	"starter/controllers"
 	"starter/initializers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,15 +14,20 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
+	router := gin.Default()
 
-	r.GET("/product", controllers.ProductsIndex)
-	r.GET("/product/:id", controllers.ProductsShow)
-	r.GET("/product/search/:product_name/:quantity", controllers.ProductsSearch)
+	// same as
+	// config := cors.DefaultConfig()
+	// config.AllowAllOrigins = true
+	// router.Use(cors.New(config))
+	router.Use(cors.Default())
 
-	r.POST("/product", controllers.ProductsCreate)
-	r.PUT("/product/:id", controllers.ProductsUpdate)
-	r.DELETE("/product/softdelete/:id", controllers.ProductsSoftDelete)
-	r.DELETE("/product/harddelete/:id", controllers.ProductsHardDelete)
-	r.Run()
+	router.GET("/product", controllers.ProductsIndex)
+	router.GET("/product/:id", controllers.ProductsShow)
+	router.GET("/product/search/:product_name/:quantity", controllers.ProductsSearch)
+	router.POST("/product", controllers.ProductsCreate)
+	router.PUT("/product/:id", controllers.ProductsUpdate)
+	router.DELETE("/product/softdelete/:id", controllers.ProductsSoftDelete)
+	router.DELETE("/product/harddelete/:id", controllers.ProductsHardDelete)
+	router.Run()
 }
